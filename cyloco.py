@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Concatenate log files, sorted by date/time.
+# Concatenate agent logs, sorted by date/time.
 
 
 import glob,sys,re
@@ -21,23 +21,34 @@ def getdate(line):
             readdate=s.group(1)
             try:
                 utc_time = datetime.strptime(readdate, dateformats[f])
-                return [utc_time,readdate]
+                return utc_time
             except ValueError as e:
                 # we should never really reach this as the regex will fail before strptime()
                 print(readdate)
                 print(line)
                 print(e)
                 sys.exit("Couldn't figure out date... :(")
-    return []
+    return 0
 
 
 # args: list of files or *.txt in current directory
 filelist=[]
 if len(sys.argv) == 1:
     filelist=glob.glob("*.txt")
+    filelist+=glob.glob("*.log")
 else:
     for input in sys.argv[1:]:
         filelist+=glob.glob(input)
+
+# determine the longest stem'ed filename, for "pretty" printing..
+stemedfilename={}
+maxfilenamelen=0
+for filename in filelist:
+    stemedfilename[filename]=Path(filename).stem
+    if len(stemedfilename[filename])>maxfilenamelen:
+        maxfilenamelen=len(stemedfilename[filename])
+
+
 
 # read all logs into a time indexed dictionary
 fulltext={}
@@ -48,14 +59,14 @@ for filename in filelist:
     # split lines and append each to the dict
     for line in text.splitlines(): 
         
-        try:
-            [utc_time,readdate]=getdate(line)
+        utc_time=getdate(line)
+        if utc_time:
             lasttime=utc_time
             # format if line starts with parseable date
-            outputline="%-27s| %s\n" % (Path(filename).stem, line)
-        except:
+            outputline="%-*s| %s\n" % (maxfilenamelen+1,stemedfilename[filename], line)
+        else:
             # if "line" is part of a multi-line entry; or date unparseable...
-            outputline="%-27s|               %s\n" % (Path(filename).stem, line)
+            outputline="%-*s|               %s\n" % (maxfilenamelen+1,stemedfilename[filename], line)
             utc_time=lasttime
         
         try:
