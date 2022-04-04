@@ -9,7 +9,7 @@ This "my first python script" handles just that by sorting the files into cronol
 Just copy it to whatever you have a path to and set execute permissions. BAT file included in case you want to use this in Windows.
 
 # Usage
-Just pass it whatever you want to concatenate. If you specify nothing, it will open "\*.txt" in local directory.
+Just pass it whatever you want to concatenate. If you specify nothing, it will open "\*.txt" and "\*.log" in local directory.
 ## Unix
 ```
 cyloco.py [<file>|<directory>]
