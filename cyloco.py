@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-# Concatenate all agent logs, sorted by date/time.
-#     ruib@cymulate.com
+# Concatenate log files, sorted by date/time.
+
 
 import glob,sys,re
 from datetime import datetime
