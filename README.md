@@ -1,5 +1,5 @@
 # Cyloco
-Concatenate and date sort multiple logs files in parallel
+Concatenate and date-sort multiple logs files in parallel
 
 # Description
 You're investigating some incident and you need to look a bunch of different logs files, each with different date formats and what not, switching back and forth between a bunch of text editors in order to establish a timeline of events...
@@ -15,7 +15,7 @@ Just pass it whatever you want to concatenate. If you specify nothing, it will o
 cyloco.py [<file>|<directory>]
 ```
 ## Windows
-If you use the provide .BAT file (I don't know of another way)
+If you use the provided .BAT file (I don't know of another way)
 ```
 cyloco [<file>|<directory>]
 ```
