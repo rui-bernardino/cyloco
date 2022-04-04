@@ -7,6 +7,8 @@ This "my first python script" handles just that by sorting the files into cronol
 
 # Install
 Just copy it to whatever you have a path to and set execute permissions. BAT file included in case you want to use this in Windows.
+## Requirements
+You do need Python3 in order to run this. I guess the stock libraries will suffice.
 
 # Usage
 Just pass it whatever you want to concatenate. If you specify nothing, it will open "\*.txt" and "\*.log" in local directory.
